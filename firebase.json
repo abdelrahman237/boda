@@ -1,0 +1,20 @@
+{
+  "firestore": {
+    "rules": "firestore.rules"
+  },
+  "flutter": {
+    "platforms": {
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "cinemabookingapp-e1573",
+          "configurations": {
+            "ios": "1:1003955092966:ios:f13298580e5f35bb5d2a27",
+            "macos": "1:1003955092966:ios:f13298580e5f35bb5d2a27",
+            "web": "1:1003955092966:web:c0299e2136e6c6595d2a27",
+            "windows": "1:1003955092966:web:7ac9763a35b8160a5d2a27"
+          }
+        }
+      }
+    }
+  }
+}

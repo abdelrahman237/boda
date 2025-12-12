@@ -1,0 +1,47 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Users collection
+    match /users/{userId} {
+      // Allow users to read their own data
+      allow read: if true; // Allow read for now (no auth)
+      // Allow users to create their own account
+      allow create: if true; // Allow registration
+      // Allow users to update their own data
+      allow update: if true; // Allow update for now
+    }
+    
+    // Movies collection
+    match /movies/{movieId} {
+      // Allow everyone to read movies
+      allow read: if true;
+      // Allow vendors to create/update/delete movies (for now, allow all writes)
+      // In production, you should add authentication check
+      allow write: if true; // TODO: Add vendor authentication check
+    }
+    
+    // Bookings collection
+    match /bookings/{bookingId} {
+      // Allow everyone to read bookings (needed for seat availability check)
+      allow read: if true;
+      // Allow customers to create bookings
+      allow create: if true; // TODO: Add user authentication check
+      // Allow users to update/delete their own bookings
+      allow update, delete: if true; // TODO: Add ownership check
+    }
+    
+    // Notifications collection
+    match /notifications/{notificationId} {
+      // Allow vendors to read notifications
+      allow read: if true; // TODO: Add vendor authentication check
+      // Allow creation of notifications (when booking is created)
+      allow create: if true;
+      // Allow vendors to update notifications (mark as read)
+      allow update: if true; // TODO: Add vendor authentication check
+      // Don't allow deletion
+      allow delete: if false;
+    }
+  }
+}
+
