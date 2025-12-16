@@ -31,6 +31,16 @@ service cloud.firestore {
       allow update, delete: if true; // TODO: Add ownership check
     }
     
+    // Seats collection - for atomic booking transactions
+    match /seats/{seatId} {
+      // Allow everyone to read seats (needed for seat availability check)
+      allow read: if true;
+      // Allow creation of seat documents (when booking)
+      allow create: if true; // TODO: Add user authentication check
+      // Don't allow updates or deletes (seats are created once when booked)
+      allow update, delete: if false;
+    }
+    
     // Notifications collection
     match /notifications/{notificationId} {
       // Allow vendors to read notifications
